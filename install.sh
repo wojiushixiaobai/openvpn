@@ -15,7 +15,7 @@ if [ ! "$(rpm -qa | grep easy-rsa)" ]; then
 fi
 
 if [ ! -d "/etc/openvpn/easy-rsa/3" ]; then
-  cp -R /usr/share/easy-rsa/3 /etc/openvpn/easy-rsa/
+  cp -R /usr/share/easy-rsa /etc/openvpn/
 fi
 
 cd /etc/openvpn/easy-rsa/3
@@ -49,7 +49,7 @@ if [ ! -d "/etc/openvpn/client/easy-rsa" ]; then
 fi
 
 if [ ! -d "/etc/openvpn/client/easy-rsa/3" ]; then
-  cp -R /usr/share/easy-rsa/3 /etc/openvpn/client/easy-rsa
+  cp -R /usr/share/easy-rsa /etc/openvpn/client
 fi
 
 cd /etc/openvpn/client/easy-rsa/3
