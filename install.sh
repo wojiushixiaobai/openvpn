@@ -55,7 +55,7 @@ fi
 cd /etc/openvpn/client/easy-rsa/3
 
 if [ ! -f "/etc/openvpn/client/easy-rsa/3/vars" ]; then
-  find / -type f -name "vars.example" | xargs -i cp {} . && mv vars.example vars
+  find /usr/share/doc/ -type f -name "vars.example" | xargs -i cp {} . && mv vars.example vars
 fi
 
 if [ ! -d "/etc/openvpn/client/easy-rsa/3/pki" ]; then
