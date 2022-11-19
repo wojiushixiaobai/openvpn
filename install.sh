@@ -69,24 +69,24 @@ fi
 cd /etc/openvpn/easy-rsa/3
 ./easyrsa import-req /etc/openvpn/client/easy-rsa/3/pki/reqs/client.req client && echo "yes" | ./easyrsa sign client client && sleep 1s
 
-if [ ! -d "/etc/openvpn/certs" ]; then
-  mkdir /etc/openvpn/certs
+if [ ! -d "/etc/openvpn/server" ]; then
+  mkdir /etc/openvpn/server
 fi
 
-if [ ! -f "/etc/openvpn/certs/dh.pem" ]; then
-  cp /etc/openvpn/easy-rsa/3/pki/dh.pem /etc/openvpn/certs/
+if [ ! -f "/etc/openvpn/server/dh.pem" ]; then
+  cp /etc/openvpn/easy-rsa/3/pki/dh.pem /etc/openvpn/server/
 fi
 
-if [ ! -f "/etc/openvpn/certs/ca.crt" ]; then
-  cp /etc/openvpn/easy-rsa/3/pki/ca.crt /etc/openvpn/certs/
+if [ ! -f "/etc/openvpn/server/ca.crt" ]; then
+  cp /etc/openvpn/easy-rsa/3/pki/ca.crt /etc/openvpn/server/
 fi
 
-if [ ! -f "/etc/openvpn/certs/server.crt" ]; then
-  cp /etc/openvpn/easy-rsa/3/pki/issued/server.crt /etc/openvpn/certs/
+if [ ! -f "/etc/openvpn/server/server.crt" ]; then
+  cp /etc/openvpn/easy-rsa/3/pki/issued/server.crt /etc/openvpn/server/
 fi
 
-if [ ! -f "/etc/openvpn/certs/server.key" ]; then
-  cp /etc/openvpn/easy-rsa/3/pki/private/server.key /etc/openvpn/certs/
+if [ ! -f "/etc/openvpn/server/server.key" ]; then
+  cp /etc/openvpn/easy-rsa/3/pki/private/server.key /etc/openvpn/server/
 fi
 
 if [ ! -f "/etc/openvpn/client/ca.crt" ]; then
@@ -133,10 +133,10 @@ proto udp
 ;dev tap
 dev tun
 ;dev-node MyTap
-ca /etc/openvpn/certs/ca.crt
-cert /etc/openvpn/certs/server.crt
-key /etc/openvpn/certs/server.key  # This file should be kept secret
-dh /etc/openvpn/certs/dh.pem
+ca /etc/openvpn/server/ca.crt
+cert /etc/openvpn/server/server.crt
+key /etc/openvpn/server/server.key  # This file should be kept secret
+dh /etc/openvpn/server/dh.pem
 
 ;topology subnet
 
@@ -194,6 +194,7 @@ client
 dev tun
 proto udp
 remote <server> 1194
+cipher AES-256-CBC
 ca /etc/openvpn/client/ca.crt
 cert /etc/openvpn/client/client.crt
 key /etc/openvpn/client/client.key
